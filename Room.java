@@ -3,7 +3,7 @@ public class Room
    private String rname; ///room name String variable
    private double rooml; ///room length variable
    private double roomw; ///room width variable
-   private int shadeinput; /// shade variablePlease enter the name of the room:
+   private String shadeinput; /// shade variablePlease enter the name of the room:
    
    /// non arg constructor
    public Room()
@@ -11,10 +11,10 @@ public class Room
       rname = "";
       rooml = 0;
       roomw = 0;
-      shadeinput = 0;
+      shadeinput = "";
    }
    
-   public Room(String N, double L, double W, int SI)
+   public Room(String N, double L, double W, String SI)
    {
       rname = N;
       rooml = L;
@@ -39,7 +39,7 @@ public class Room
       roomw = W;
    }
    
-   public void setInput(int SI) /////////// shade input setter
+   public void setInput(String SI) /////////// shade input setter
    {
       shadeinput = SI;
    }
@@ -61,7 +61,7 @@ public class Room
       return roomw;
    }
    
-   public int getInput()
+   public String getInput()
    {
       return shadeinput;
    }
@@ -103,59 +103,28 @@ public class Room
        btu = BTUV4;
       }
       
-      final int UI1 = 1; ////////// user input values from getinput()
-      final int UI2 = 2;
-      final int UI3 = 3;
+      final String UI1 = "Little"; ////////// user input values from getinput()
+      final String UI2 = "Moderate";
+      final String UI3 = "Abundant";
       
       final double UIAMP1 = 1.15; /////// user input amplifiers for input option 1 and 3
       final double UIAMP3 = 0.9;
       
-      if(getInput() == UI1)///// if statement chain for shade abundance
+      if(getInput().equals(UI1))///// if statement chain for shade abundance
       {
       total = btu * UIAMP1;
       }
-      else if(getInput() == UI2)
+      else if(getInput().equals(UI2))
       {
       total = btu;
       }
-      else if(getInput() == UI3)
+      else if(getInput().equals(UI3))
       {
       total = btu * UIAMP3;
       }
       
       return total;//// returns cooling capacity
-
    }
-   
-   
-  ////////////////////////////user shade input to string method//////
-  
-  
-   public String getShade()
-   {
-      String endshade = ""; ///////// String that will be returned       
-      final int UI1 = 1; ////////// user input values from shade question
-      final int UI2 = 2;
-      final int UI3 = 3;
       
-      final String OP1 = "Little Shade"; //// option 1,2, and 3 values
-      final String OP2 = "Moderate Shade";
-      final String OP3 = "Abundant Shade";
-      
-      if(getInput() == UI1)///// if statement chain for shade abundance in string format
-      {
-         endshade = OP1;
-      }
-      else if(getInput() == UI2)
-      {
-         endshade = OP2;
-      }
-      else if(getInput() == UI3)
-      {
-         endshade = OP3;
-      }
- 
-      return endshade;
-   
-   }
+    
 }

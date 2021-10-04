@@ -19,9 +19,11 @@ public class Project_2_Nail_Claros
       double roomL;/// room length variable
       double roomW; //room width variable
       String shadeinput;/// int for shade input selection
+      
       int litR = 0;
-           int modR  = 0;
-           int abunR = 0;
+      int modR  = 0; /// counting variables
+      int abunR = 0;
+      
       ///while loop to read and print out info
          while(inputFile.hasNext())
          { 
@@ -45,11 +47,9 @@ public class Project_2_Nail_Claros
             { 
                inputFile.nextLine();//skips blank line 
             }
-            
-                   
+
            
-           
-      if(shadeinput.equals("Little"))
+      if(shadeinput.equals("Little")) /////////If statements for counting process
        litR+= 1;
        else if(shadeinput.equals("Moderate"))
        modR+= 1;
@@ -57,14 +57,14 @@ public class Project_2_Nail_Claros
        abunR+= 1;
       
             
-            System.out.println("\nRoom Name: " + cont.getName() +
+            System.out.println("\nRoom Name: " + cont.getName() +  ///// prints out info
                         "\nRoom Area: " + cont.getArea() +
                         "\nAmount of Shade: " + cont.getInput());
                       
          System.out.printf("BTUs Per Hour needed: %,.0f", cont.getCC());
          ////////////////////////////////////////  
                 
-         if(!inputFile.hasNext())
+         if(!inputFile.hasNext()) //// if statenent to delay the displayment of the counting types to the end
          {
          System.out.println("\nNumber of rooms with little shade: " + litR +
                "\nNumber of rooms with moderate shade: " + modR +
@@ -73,14 +73,7 @@ public class Project_2_Nail_Claros
          
      }//// end of loop
      inputFile.close();
-     
-   
       
-     
-     
-     ///////room display counter 
-     
-     
      
      }////////// try end
        
@@ -90,9 +83,6 @@ public class Project_2_Nail_Claros
          System.out.println("Something went wrong reading the file: " + ex.getMessage());
         }
         
-        /*  System.out.print("Number of rooms with little shade: " + cont.getCount1());
-     System.out.print("Number of rooms with moderate shade: " + cont.getCount2());
-     System.out.print("Number of rooms with abundant shade: " + cont.getCount3()); */
-   
+          
    } 
 }
