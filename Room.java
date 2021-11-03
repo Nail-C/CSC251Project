@@ -4,22 +4,15 @@ public class Room
    private double rooml; ///room length variable
    private double roomw; ///room width variable
    private String shadeinput; /// shade variablePlease enter the name of the room:
-   
-   /// non arg constructor
-   public Room()
-   {
-      rname = "";
-      rooml = 0;
-      roomw = 0;
-      shadeinput = "";
-   }
-   
-   public Room(String N, double L, double W, String SI)
+   private AirConditioner aircon;
+    
+   public Room(String N, double L, double W, String SI, AirConditioner airc)
    {
       rname = N;
       rooml = L;
       roomw = W;
-      shadeinput = SI; /// SI is an abbreviation for Shade input 
+      shadeinput = SI; /// SI is an abbreviation for Shade input
+      aircon = new AirConditioner(airc); 
    }
    
    ////////////////////// setters ////////////
@@ -43,6 +36,12 @@ public class Room
    {
       shadeinput = SI;
    }
+   
+   public void setAirConditioner(AirConditioner airc)
+   {
+      aircon = new AirConditioner(airc);
+   }
+
    
    /////////////getters///////////////////
    
@@ -71,8 +70,13 @@ public class Room
       return roomw * rooml;
    }
    
-   //////////////////// other getters//////////////
+   public AirConditioner getAirConditioner()
+   {
+      return new AirConditioner(aircon); 
+   }
    
+   //////////////////// other getters//////////////
+  
    public double getCC() ///CC is an abbreviation for cooling capacity method
    {
       double btu = 0;///////// BTU units variable
@@ -90,15 +94,15 @@ public class Room
       {
        btu = BTUV1;
       }
-      else if(P1A <= getArea() || getArea() <= P2A)
+      else if(P1A <= getArea() && getArea() <= P2A)
       {
        btu = BTUV2;
       }
-       else if(P2A < getArea() || getArea() < P3A)
+       else if(getArea() < P3A)
       {
        btu = BTUV3;
       }
-      else //// anything greater than P3A value
+      else if(getArea() >= P3A)//// anything greater than P3A value
       {
        btu = BTUV4;
       }
@@ -125,6 +129,39 @@ public class Room
       
       return total;//// returns cooling capacity
    }
-      
+   
+   //////////////////////////////////boolean check method ////////////////////////////
+   
+      public String hasAdequateCooling()
+      {
+         double var1 = getCC();
+         double var2 = aircon.getBTU();
+         
+         boolean check = (var1 == var2);
+         String endline;
+         
+                        
+               if(check == true)
+               {
+                  endline = ("\nThis room is adequately cooled.");
+               }
+               else
+               {
+                  endline = ("\nThis room is not adequately cooled.");
+               }
+         
+         return endline;
+      } 
+  
+    ///////////////////////////////to String method
     
+    public String toString()
+    {
+         return String.format("\nRoom Name: " + getName() +  ///// prints out info
+                        "\nRoom Area: %,.1f"  +
+                        "\nAmount of Shade: " + getInput() +
+                        "\nBTUs Per Hour needed: %,.0f" +
+                        aircon.toString() + hasAdequateCooling() +"", getArea(), getCC());
+           
+    }
 }

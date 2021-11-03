@@ -7,82 +7,83 @@ public class Project_2_Nail_Claros
 {
    public static void main(String[] args)
    {
-      Scanner keyboard = new Scanner(System.in);
-      
       try
       { ////start of try/////////////////
-      File file = new File("Rooms.txt");
+      File file = new File("Rooms2.txt");
       
       Scanner inputFile = new Scanner(file);
       
+      ///Declared variables for ROOM 
       String name; /////////// String for room name
       double roomL;/// room length variable
       double roomW; //room width variable
-      String shadeinput;/// int for shade input selection
-      
-      int litR = 0;
-      int modR  = 0; /// counting variables
-      int abunR = 0;
+      String shadeinput;/// shade input 
+      ///Declared variables for AC
+      String Manufacturer;
+      String type;
+      double CoolingC;
+      /////Array list
+      ArrayList<Room> list = new ArrayList<Room>();
       
       ///while loop to read and print out info
          while(inputFile.hasNext())
          { 
-   
+         
+         /////////////ROOM VARIABLES////////////////////////////////////////////////
          name = inputFile.nextLine(); ///user enters room name here
          
          roomL = inputFile.nextDouble(); ///user enters room length here
       
          roomW = inputFile.nextDouble();///user enters room width here
-      
-         shadeinput = inputFile.next();///user enters a 1-3 here for room shade
-      
-         Room cont = new Room(name, roomL, roomW, shadeinput); /// array to access room class
          
+         inputFile.nextLine();
+         
+         shadeinput = inputFile.nextLine();///user enters a 1-3 here for room shade      
+         
+         ///////////////////////////////////////////////AC VARIABLES
+         Manufacturer = inputFile.nextLine();
+         
+         type = inputFile.nextLine();
+                  
+         CoolingC = inputFile.nextDouble();
+         ////////////////////////////////////////end of input
+          
+         AirConditioner AC = new AirConditioner(Manufacturer, type, CoolingC);
+         
+         Room cont = new Room(name, roomL, roomW, shadeinput, AC); /// array to access room class
+         
+         list.add(cont);
              
-                  if(inputFile.hasNext())
+            if(inputFile.hasNext())
             { 
                inputFile.nextLine();//skips blank line 
             }
-             if(inputFile.hasNext())
+            if(inputFile.hasNext())
             { 
                inputFile.nextLine();//skips blank line 
             }
-
-           
-      if(shadeinput.equals("Little")) /////////If statements for counting process
-       litR+= 1;
-       else if(shadeinput.equals("Moderate"))
-       modR+= 1;
-      else if(shadeinput.equals("Abundant"))
-       abunR+= 1;
-      
-            
-            System.out.println("\nRoom Name: " + cont.getName() +  ///// prints out info
-                        "\nRoom Area: " + cont.getArea() +
-                        "\nAmount of Shade: " + cont.getInput());
-                      
-         System.out.printf("BTUs Per Hour needed: %,.0f", cont.getCC());
          ////////////////////////////////////////  
                 
-         if(!inputFile.hasNext()) //// if statenent to delay the displayment of the counting types to the end
-         {
-         System.out.println("\nNumber of rooms with little shade: " + litR +
-               "\nNumber of rooms with moderate shade: " + modR +
-               "\nNumber of rooms with abundant shade: " + abunR);
-         } 
-         
+             
      }//// end of loop
      inputFile.close();
       
+           for(int i = 0; i < list.size(); i++)
+            {
+               System.out.println(list.get(i));       
+            }
      
      }////////// try end
+       
+       
        
      catch(IOException ex)//If something goes wrong,       
         {
          //getMessage method will print out it's message about what went wrong
          System.out.println("Something went wrong reading the file: " + ex.getMessage());
         }
-        
+     
+   
           
    } 
 }
